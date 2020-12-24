@@ -53,9 +53,9 @@ struct LoginForm {
         print(#function, $0)
     }
     
-    private func resetPasswordIfNeeded(editingBegan: Bool) {
+    private func userBeganEditingUsername(editingBegan: Bool) {
         guard editingBegan else { return }
-        if credentials.shouldResetPassword {
+        if credentials.shouldResetPasswordWhenStartingToEditUsername {
             credentials = credentials.withClearedPassword()
         }
     }
@@ -82,7 +82,7 @@ extension LoginForm: View {
             VStack {
                 Form {
                     Section(header: usernameHeader) {
-                        TextField("Username", text: $credentials.username, onEditingChanged: resetPasswordIfNeeded(editingBegan:))
+                        TextField("Username", text: $credentials.username, onEditingChanged: userBeganEditingUsername(editingBegan:))
                             .autocapitalization(.none)
                     }
                     
