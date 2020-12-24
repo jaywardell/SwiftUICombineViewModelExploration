@@ -75,6 +75,18 @@ class PasswordValidatorTests: XCTestCase {
         expect(.passwordsIsTooShort, from: sut, for: makeCredentials(matchingPassword: "1Aa2"))
     }
     
+    func test_validate_5CharacterPasswordsAreValid() {
+        let sut = PasswordValidator()
+
+        expect(.valid, from: sut, for: makeCredentials(matchingPassword: "1Aa2E"))
+    }
+
+    func test_validate_6CharacterPasswordsAreValid() {
+        let sut = PasswordValidator()
+
+        expect(.valid, from: sut, for: makeCredentials(matchingPassword: "1Aa2E3"))
+    }
+
     func test_validate_passwordMustHaveAtLeastOneNumber() {
         let sut = PasswordValidator()
         let tooShortPassword = makeCredentials(matchingPassword: "aaaaaBBaaa")
