@@ -29,6 +29,14 @@ class PasswordValidatorTests: XCTestCase {
         expect(.emptyUsername, from: sut, for: emptyCredentials)
     }
     
+    func test_validate_shortUsernameIsInvalid() {
+        let sut = PasswordValidator()
+        let tooshortUsernameCredentials = makeCredentials(username: "G", matchingPassword: "12345")
+
+        expect(.usernameIsTooShort, from: sut, for: tooshortUsernameCredentials)
+    }
+
+
     func test_validate_emptyPasswordIsInvalid() {
         let sut = PasswordValidator()
         let emptyPasswordCredentials = MockCredentials(username: "George", password: "", passwordAgain: "")
