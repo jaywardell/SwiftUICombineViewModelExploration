@@ -41,6 +41,11 @@ class PasswordValidatorTests: XCTestCase {
         expect(.valid, from: sut, for: makeCredentials(username: "Gil", matchingPassword: "1A2B3c"))
     }
 
+    func test_validate_4CharacterUsernameIsVald() {
+        let sut = PasswordValidator()
+        expect(.valid, from: sut, for: makeCredentials(username: "Gary", matchingPassword: "1A2B3c"))
+    }
+
     func test_validate_emptyPasswordIsInvalid() {
         let sut = PasswordValidator()
         let emptyPasswordCredentials = makeCredentials(username: "George", matchingPassword: "")
