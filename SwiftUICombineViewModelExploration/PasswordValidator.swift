@@ -7,15 +7,9 @@
 
 import Foundation
 
-public struct PasswordValidator: CredentialsValidator {
+public struct PasswordValidator {
     
     public init() {}
-    
-    public func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
-
-        let validation: Validation = validate(credentials)
-        return .init(passwordFeedback: validation.reason, isValid: validation == .valid)
-    }
     
     public enum Validation: Equatable {
         case valid
@@ -86,5 +80,15 @@ public struct PasswordValidator: CredentialsValidator {
         else {
             return .valid
         }
+    }
+}
+
+// MARK:- PasswordValidator: CredentialsValidator
+extension PasswordValidator: CredentialsValidator {
+        
+    func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
+
+        let validation: Validation = validate(credentials)
+        return .init(passwordFeedback: validation.reason, isValid: validation == .valid)
     }
 }
