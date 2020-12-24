@@ -44,16 +44,24 @@ class PasswordValidatorTests: XCTestCase {
         expect(.emptyPassword, from: sut, for: emptyPasswordCredentials)
     }
 
+    func test_validate_emptyPasswordVerificationIsInvalid() {
+        let sut = PasswordValidator()
+        let nonmatchingPasswords = MockCredentials(username: "George", password: "1A2B3c", passwordAgain: "")
+
+        expect(.emptyPasswordVerification, from: sut, for: nonmatchingPasswords)
+    }
+
+    
     func test_validate_nonMatchingPasswordsAreInvalid() {
         let sut = PasswordValidator()
-        let nonmatchingPasswords = MockCredentials(username: "George", password: "12345", passwordAgain: "bye")
+        let nonmatchingPasswords = MockCredentials(username: "George", password: "1A2B3c", passwordAgain: "A2B3c1")
 
         expect(.passwordsDoNotMatch, from: sut, for: nonmatchingPasswords)
     }
 
     func test_validate_shortPasswordsAreInvalid() {
         let sut = PasswordValidator()
-        let tooShortPassword = makeCredentials(username: "George", matchingPassword: "12")
+        let tooShortPassword = makeCredentials(username: "George", matchingPassword: "1Aa")
 
         expect(.passwordsIsTooShort, from: sut, for: tooShortPassword)
     }

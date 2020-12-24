@@ -23,6 +23,7 @@ public struct PasswordValidator: CredentialsValidator {
         case usernameIsTooShort
         case emptyPassword
         case passwordsIsTooShort
+        case emptyPasswordVerification
         case passwordsDoNotMatch
         case passwordNeedsANumber
         case passwordNeedsALowercaseLetter
@@ -36,7 +37,11 @@ public struct PasswordValidator: CredentialsValidator {
             case .valid: return ""
             case .emptyUsername: return "Username cannot be empty"
             case .usernameIsTooShort: return "Username must be at least \(Self.MinUsernameLength) characters long"
-            case .emptyPassword: return "Password cannot be emoty"
+            case .emptyPassword: return "Password cannot be empty"
+                
+            // if the user hasn't yet typed the password verification, don't report anything
+            case .emptyPasswordVerification: return ""
+                
             case .passwordsIsTooShort: return "Passwords must be at least \(Self.MinPasswordLength) characters long"
             case .passwordsDoNotMatch: return "Passwords do not match"
             case .passwordNeedsANumber: return "Passwords need at least one number"
@@ -60,12 +65,6 @@ public struct PasswordValidator: CredentialsValidator {
         else if credentials.password.isEmpty {
             return .emptyPassword
         }
-        else if credentials.password.count < Validation.MinPasswordLength {
-            return .passwordsIsTooShort
-        }
-        else if credentials.password != credentials.passwordAgain {
-            return .passwordsDoNotMatch
-        }
         else if !Self.HasNumberPredicate.evaluate(with: credentials.password) {
             return .passwordNeedsANumber
         }
@@ -74,6 +73,15 @@ public struct PasswordValidator: CredentialsValidator {
         }
         else if !Self.HasUppercaseLetterPredicate.evaluate(with: credentials.password) {
             return .passwordNeedsAnUppercaseLetter
+        }
+        else if credentials.password.count < Validation.MinPasswordLength {
+            return .passwordsIsTooShort
+        }
+        else if credentials.passwordAgain.isEmpty {
+            return .emptyPasswordVerification
+        }
+        else if credentials.password != credentials.passwordAgain {
+            return .passwordsDoNotMatch
         }
         else {
             return .valid
