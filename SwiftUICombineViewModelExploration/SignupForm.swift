@@ -32,15 +32,17 @@ struct SignupForm {
     let validator: CredentialsValidator
   
     fileprivate struct AlwaysValid: CredentialsValidator {
-        func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
+        func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C, completion: @escaping (V)->()) {
             print(credentials)
-            return .init(passwordFeedback: "", isValid: true)
+            let validation = V(passwordFeedback: "", isValid: true)
+            completion(validation)
         }
     }
     
     fileprivate struct NeverValid: CredentialsValidator {
-        func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
-            .init(passwordFeedback: "", isValid: false)
+        func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C, completion: @escaping (V)->()) {
+            let validation = V(passwordFeedback: "", isValid: false)
+            completion(validation)
         }
     }
 
@@ -118,7 +120,9 @@ extension SignupForm: View {
             .navigationTitle("Sign up")
         }
         .onChange(of: credentials, perform: { value in
-            self.validation = validator.validate(credentials)
+            validator.validate(credentials) {
+                self.validation = $0
+            }
         })
     }
 }

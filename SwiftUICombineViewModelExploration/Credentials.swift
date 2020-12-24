@@ -29,5 +29,5 @@ public protocol CredentialsValidation {
 }
 
 protocol CredentialsValidator {
-    func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C) -> V
+    func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C, completion: @escaping (V)->())
 }

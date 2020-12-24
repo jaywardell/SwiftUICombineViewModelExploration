@@ -67,9 +67,10 @@ public struct PasswordValidator {
 // MARK:- PasswordValidator: CredentialsValidator
 extension PasswordValidator: CredentialsValidator {
         
-    func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
+    func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C, completion: @escaping (V)->()) {
 
         let validation: Validation = validate(credentials)
-        return .init(passwordFeedback: validation.explanantion, isValid: validation == .valid)
+        let toCallBack = V(passwordFeedback: validation.explanantion, isValid: validation == .valid)
+        completion(toCallBack)
     }
 }
