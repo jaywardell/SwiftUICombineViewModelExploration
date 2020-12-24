@@ -26,6 +26,7 @@ public struct PasswordValidator: CredentialsValidator {
         case passwordsDoNotMatch
         case passwordNeedsANumber
         case passwordNeedsALowercaseLetter
+        case passwordNeedsAnUppercaseLetter
 
         public static let MinPasswordLength: Int = 5
         public static let MinUsernameLength: Int = 3
@@ -40,12 +41,14 @@ public struct PasswordValidator: CredentialsValidator {
             case .passwordsDoNotMatch: return "Passwords do not match"
             case .passwordNeedsANumber: return "Passwords need at least one number"
             case .passwordNeedsALowercaseLetter: return "Passwords need at least one lowercase letter"
+            case .passwordNeedsAnUppercaseLetter: return "Passwords need at least one uppercase letter"
             }
         }
     }
     
-    static let HasNumberPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[0-9]")
-    static let HasLowercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[a-z]")
+    static let HasNumberPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[0-9].*")
+    static let HasLowercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[a-z].*")
+    static let HasUppercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[A-Z].*")
 
     public func validate<C>(_ credentials: C) -> Validation where C : Credentials {
         if credentials.username.isEmpty {
@@ -69,9 +72,11 @@ public struct PasswordValidator: CredentialsValidator {
         else if !Self.HasLowercaseLetterPredicate.evaluate(with: credentials.password) {
             return .passwordNeedsALowercaseLetter
         }
-        else {
-            return .passwordsDoNotMatch
+        else if !Self.HasUppercaseLetterPredicate.evaluate(with: credentials.password) {
+            return .passwordNeedsAnUppercaseLetter
         }
-//        return .emptyUsername
+        else {
+            return .valid
+        }
     }
 }

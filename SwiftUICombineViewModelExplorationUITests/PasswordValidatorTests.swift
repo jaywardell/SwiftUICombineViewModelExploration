@@ -72,6 +72,22 @@ class PasswordValidatorTests: XCTestCase {
         expect(.passwordNeedsALowercaseLetter, from: sut, for: tooShortPassword)
     }
 
+    func test_validate_passwordMustHaveAtLeastOneUppercaseLetter() {
+        let sut = PasswordValidator()
+        let tooShortPassword = makeCredentials(username: "George", matchingPassword: "1a1a2f")
+
+        expect(.passwordNeedsAnUppercaseLetter, from: sut, for: tooShortPassword)
+    }
+
+    func test_validate_validPasswordsPass() {
+        let sut = PasswordValidator()
+
+        expect(.valid, from: sut, for: makeCredentials(username: "George", matchingPassword: "1a1a2F"))
+        expect(.valid, from: sut, for: makeCredentials(username: "George", matchingPassword: "a1a2F"))
+        expect(.valid, from: sut, for: makeCredentials(username: "George", matchingPassword: "E1a1a2"))
+        expect(.valid, from: sut, for: makeCredentials(username: "George", matchingPassword: "99rTTe"))
+    }
+
     // Mark:- Helpers
     
     func makeCredentials(username: String, matchingPassword: String) -> MockCredentials {
