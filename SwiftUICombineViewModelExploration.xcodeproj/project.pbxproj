@@ -48,6 +48,7 @@
 		7C1D664C2594DAE000A9ED00 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		7C1D665E2594E0DF00A9ED00 /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
+		7CC9CEDF2594F99800BA4BB3 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +72,7 @@
 		7C1D66082594CCA300A9ED00 = {
 			isa = PBXGroup;
 			children = (
+				7CC9CEDF2594F99800BA4BB3 /* Readme.md */,
 				7C1D66132594CCA400A9ED00 /* SwiftUICombineViewModelExploration */,
 				7C1D662A2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests */,
 				7C1D66352594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests */,

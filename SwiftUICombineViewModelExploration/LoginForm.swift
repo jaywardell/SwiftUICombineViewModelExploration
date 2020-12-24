@@ -5,9 +5,6 @@
 //  Created by Joseph Wardell on 12/24/20.
 //
 
-// on 12/24/2020, I watched 2 youtube video that got me thinking about design patterns using SwiftUI and Combine
-// https://www.youtube.com/watch?v=YJRApch2cc4&t=435s
-// https://www.youtube.com/watch?v=bdqEcpppAMc
 
 import SwiftUI
 
