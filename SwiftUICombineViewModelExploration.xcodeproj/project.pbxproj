@@ -14,20 +14,14 @@
 		7C1D661E2594CCA400A9ED00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C1D661D2594CCA400A9ED00 /* Preview Assets.xcassets */; };
 		7C1D66212594CCA400A9ED00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C1D661F2594CCA400A9ED00 /* LaunchScreen.storyboard */; };
 		7C1D662C2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D662B2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift */; };
-		7C1D66372594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66362594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift */; };
 		7C1D66482594CCC600A9ED00 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66472594CCC600A9ED00 /* LoginForm.swift */; };
 		7C1D664D2594DAE000A9ED00 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D664C2594DAE000A9ED00 /* Credentials.swift */; };
+		7C1D665A2594E0B900A9ED00 /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */; };
+		7C1D66752594E34500A9ED00 /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D665E2594E0DF00A9ED00 /* PasswordValidatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		7C1D66282594CCA500A9ED00 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7C1D66092594CCA300A9ED00 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7C1D66102594CCA300A9ED00;
-			remoteInfo = SwiftUICombineViewModelExploration;
-		};
-		7C1D66332594CCA500A9ED00 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7C1D66092594CCA300A9ED00 /* Project object */;
 			proxyType = 1;
@@ -48,11 +42,12 @@
 		7C1D66272594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUICombineViewModelExplorationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1D662B2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICombineViewModelExplorationTests.swift; sourceTree = "<group>"; };
 		7C1D662D2594CCA500A9ED00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C1D66322594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUICombineViewModelExplorationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1D66362594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICombineViewModelExplorationUITests.swift; sourceTree = "<group>"; };
 		7C1D66382594CCA500A9ED00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C1D66472594CCC600A9ED00 /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
 		7C1D664C2594DAE000A9ED00 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
+		7C1D665E2594E0DF00A9ED00 /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,13 +59,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7C1D66242594CCA500A9ED00 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7C1D662F2594CCA500A9ED00 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -95,7 +83,6 @@
 			children = (
 				7C1D66112594CCA300A9ED00 /* SwiftUICombineViewModelExploration.app */,
 				7C1D66272594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.xctest */,
-				7C1D66322594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +95,7 @@
 				7C1D66182594CCA400A9ED00 /* ContentView.swift */,
 				7C1D66472594CCC600A9ED00 /* LoginForm.swift */,
 				7C1D664C2594DAE000A9ED00 /* Credentials.swift */,
+				7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */,
 				7C1D661A2594CCA400A9ED00 /* Assets.xcassets */,
 				7C1D661F2594CCA400A9ED00 /* LaunchScreen.storyboard */,
 				7C1D66222594CCA400A9ED00 /* Info.plist */,
@@ -137,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				7C1D66362594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift */,
+				7C1D665E2594E0DF00A9ED00 /* PasswordValidatorTests.swift */,
 				7C1D66382594CCA500A9ED00 /* Info.plist */,
 			);
 			path = SwiftUICombineViewModelExplorationUITests;
@@ -180,24 +169,6 @@
 			productReference = 7C1D66272594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7C1D66312594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7C1D66412594CCA500A9ED00 /* Build configuration list for PBXNativeTarget "SwiftUICombineViewModelExplorationUITests" */;
-			buildPhases = (
-				7C1D662E2594CCA500A9ED00 /* Sources */,
-				7C1D662F2594CCA500A9ED00 /* Frameworks */,
-				7C1D66302594CCA500A9ED00 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7C1D66342594CCA500A9ED00 /* PBXTargetDependency */,
-			);
-			name = SwiftUICombineViewModelExplorationUITests;
-			productName = SwiftUICombineViewModelExplorationUITests;
-			productReference = 7C1D66322594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -211,10 +182,6 @@
 						CreatedOnToolsVersion = 12.3;
 					};
 					7C1D66262594CCA500A9ED00 = {
-						CreatedOnToolsVersion = 12.3;
-						TestTargetID = 7C1D66102594CCA300A9ED00;
-					};
-					7C1D66312594CCA500A9ED00 = {
 						CreatedOnToolsVersion = 12.3;
 						TestTargetID = 7C1D66102594CCA300A9ED00;
 					};
@@ -235,7 +202,6 @@
 			targets = (
 				7C1D66102594CCA300A9ED00 /* SwiftUICombineViewModelExploration */,
 				7C1D66262594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests */,
-				7C1D66312594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,13 +224,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7C1D66302594CCA500A9ED00 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -273,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C1D66152594CCA400A9ED00 /* AppDelegate.swift in Sources */,
+				7C1D665A2594E0B900A9ED00 /* PasswordValidator.swift in Sources */,
 				7C1D66172594CCA400A9ED00 /* SceneDelegate.swift in Sources */,
 				7C1D664D2594DAE000A9ED00 /* Credentials.swift in Sources */,
 				7C1D66192594CCA400A9ED00 /* ContentView.swift in Sources */,
@@ -285,14 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C1D662C2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7C1D662E2594CCA500A9ED00 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7C1D66372594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift in Sources */,
+				7C1D66752594E34500A9ED00 /* PasswordValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,11 +256,6 @@
 			isa = PBXTargetDependency;
 			target = 7C1D66102594CCA300A9ED00 /* SwiftUICombineViewModelExploration */;
 			targetProxy = 7C1D66282594CCA500A9ED00 /* PBXContainerItemProxy */;
-		};
-		7C1D66342594CCA500A9ED00 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7C1D66102594CCA300A9ED00 /* SwiftUICombineViewModelExploration */;
-			targetProxy = 7C1D66332594CCA500A9ED00 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -525,46 +473,6 @@
 			};
 			name = Release;
 		};
-		7C1D66422594CCA500A9ED00 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BU47XE2F27;
-				INFOPLIST_FILE = SwiftUICombineViewModelExplorationUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.oldjewel.SwiftUICombineViewModelExplorationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SwiftUICombineViewModelExploration;
-			};
-			name = Debug;
-		};
-		7C1D66432594CCA500A9ED00 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BU47XE2F27;
-				INFOPLIST_FILE = SwiftUICombineViewModelExplorationUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.oldjewel.SwiftUICombineViewModelExplorationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SwiftUICombineViewModelExploration;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -591,15 +499,6 @@
 			buildConfigurations = (
 				7C1D663F2594CCA500A9ED00 /* Debug */,
 				7C1D66402594CCA500A9ED00 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7C1D66412594CCA500A9ED00 /* Build configuration list for PBXNativeTarget "SwiftUICombineViewModelExplorationUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7C1D66422594CCA500A9ED00 /* Debug */,
-				7C1D66432594CCA500A9ED00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
