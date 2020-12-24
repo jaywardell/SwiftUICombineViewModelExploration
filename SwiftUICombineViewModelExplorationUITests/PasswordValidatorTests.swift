@@ -51,7 +51,7 @@ class PasswordValidatorTests: XCTestCase {
         expect(.passwordsDoNotMatch, from: sut, for: nonmatchingPasswords)
     }
 
-    func test_shortPasswordsAreInvalid() {
+    func test_validate_shortPasswordsAreInvalid() {
         let sut = PasswordValidator()
         let tooShortPassword = makeCredentials(username: "George", matchingPassword: "12")
 
