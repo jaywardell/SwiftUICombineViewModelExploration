@@ -17,7 +17,6 @@
 		7C1D66482594CCC600A9ED00 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66472594CCC600A9ED00 /* LoginForm.swift */; };
 		7C1D664D2594DAE000A9ED00 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D664C2594DAE000A9ED00 /* Credentials.swift */; };
 		7C1D665A2594E0B900A9ED00 /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */; };
-		7C1D66752594E34500A9ED00 /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D665E2594E0DF00A9ED00 /* PasswordValidatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,12 +41,9 @@
 		7C1D66272594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUICombineViewModelExplorationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1D662B2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICombineViewModelExplorationTests.swift; sourceTree = "<group>"; };
 		7C1D662D2594CCA500A9ED00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C1D66362594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICombineViewModelExplorationUITests.swift; sourceTree = "<group>"; };
-		7C1D66382594CCA500A9ED00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C1D66472594CCC600A9ED00 /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
 		7C1D664C2594DAE000A9ED00 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
-		7C1D665E2594E0DF00A9ED00 /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
 		7CC9CEDF2594F99800BA4BB3 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +71,6 @@
 				7CC9CEDF2594F99800BA4BB3 /* Readme.md */,
 				7C1D66132594CCA400A9ED00 /* SwiftUICombineViewModelExploration */,
 				7C1D662A2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests */,
-				7C1D66352594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests */,
 				7C1D66122594CCA300A9ED00 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,16 +116,6 @@
 				7C1D662D2594CCA500A9ED00 /* Info.plist */,
 			);
 			path = SwiftUICombineViewModelExplorationTests;
-			sourceTree = "<group>";
-		};
-		7C1D66352594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7C1D66362594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift */,
-				7C1D665E2594E0DF00A9ED00 /* PasswordValidatorTests.swift */,
-				7C1D66382594CCA500A9ED00 /* Info.plist */,
-			);
-			path = SwiftUICombineViewModelExplorationUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,7 +232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C1D662C2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift in Sources */,
-				7C1D66752594E34500A9ED00 /* PasswordValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
