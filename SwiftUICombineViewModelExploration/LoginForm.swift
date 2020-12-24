@@ -35,20 +35,20 @@ struct LoginForm {
 
     let validate: (CredentialsViewModel)->ValidationViewModel
     
-    static let alwaysValid: (CredentialsViewModel)->ValidationViewModel = {
+    static let alwaysValid: (Credentials)->ValidationViewModel = {
         print($0)
         return .init(passwordFeedback: "", isValid: true)
     }
 
-    static let neverValid: (CredentialsViewModel)->ValidationViewModel = { _ in
+    static let neverValid: (Credentials)->ValidationViewModel = { _ in
         .init(passwordFeedback: "", isValid: false)
     }
 
-    let submit: (CredentialsViewModel)->()
+    let submit: (Credentials)->()
     
-    static let emptySubmission: (CredentialsViewModel)->() = { _ in }
+    static let emptySubmission: (Credentials)->() = { _ in }
 
-    static let printSubmission: (CredentialsViewModel)->() = {
+    static let printSubmission: (Credentials)->() = {
         print(#function, $0)
     }
 }
@@ -107,7 +107,7 @@ extension LoginForm: View {
     }
 }
 
-// MARK:-
+// MARK:- LoginForm_Previews
 struct LoginForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
