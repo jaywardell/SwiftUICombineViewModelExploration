@@ -21,13 +21,17 @@ public struct PasswordValidator: CredentialsValidator {
         case valid
         case emptyUsername
         case emptyPassword
+        case passwordsIsTooShort
         case passwordsDoNotMatch
         
+        public static let MinPasswordLength: Int = 5
+
         var reason: String {
             switch self {
             case .valid: return ""
             case .emptyUsername: return "Username cannot be empty"
             case .emptyPassword: return "Password cannot be emoty"
+            case .passwordsIsTooShort: return "Passwords must be at least \(Self.MinPasswordLength) characters long"
             case .passwordsDoNotMatch: return "Passwords do not match"
             }
         }
@@ -39,6 +43,9 @@ public struct PasswordValidator: CredentialsValidator {
         }
         else if credentials.password.isEmpty {
             return .emptyPassword
+        }
+        else if credentials.password.count < Validation.MinPasswordLength {
+            return .passwordsIsTooShort
         }
         else {
             return .passwordsDoNotMatch

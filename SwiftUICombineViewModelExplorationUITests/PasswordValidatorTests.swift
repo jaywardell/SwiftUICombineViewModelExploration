@@ -36,13 +36,20 @@ class PasswordValidatorTests: XCTestCase {
         expect(.emptyPassword, from: sut, for: emptyPasswordCredentials)
     }
 
-    func test_validate_emptyNonMatchingPasswordfsAreInvalid() {
+    func test_validate_nonMatchingPasswordsAreInvalid() {
         let sut = PasswordValidator()
-        let nonmatchingPasswords = MockCredentials(username: "George", password: "hi", passwordAgain: "bye")
+        let nonmatchingPasswords = MockCredentials(username: "George", password: "12345", passwordAgain: "bye")
 
         expect(.passwordsDoNotMatch, from: sut, for: nonmatchingPasswords)
     }
 
+    func test_shortPasswordsAreInvalid() {
+        let sut = PasswordValidator()
+        let nonmatchingPasswords = MockCredentials(username: "George", password: "12", passwordAgain: "12")
+
+        expect(.passwordsIsTooShort, from: sut, for: nonmatchingPasswords)
+    }
+    
     // Mark:- Helpers
     
     func expect<C: Credentials>(_ expected: PasswordValidator.Validation, from sut: PasswordValidator, for input: C, file: StaticString = #filePath, line: UInt = #line) {
