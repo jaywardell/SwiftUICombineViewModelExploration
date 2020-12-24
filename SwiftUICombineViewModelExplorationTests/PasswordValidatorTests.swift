@@ -77,14 +77,14 @@ class PasswordValidatorTests: XCTestCase {
     
     func test_validate_passwordMustHaveAtLeastOneNumber() {
         let sut = PasswordValidator()
-        let tooShortPassword = makeCredentials(matchingPassword: "aaaaaaaa")
+        let tooShortPassword = makeCredentials(matchingPassword: "aaaaaBBaaa")
 
         expect(.passwordNeedsANumber, from: sut, for: tooShortPassword)
     }
     
     func test_validate_passwordMustHaveAtLeastOneLowercaseLetter() {
         let sut = PasswordValidator()
-        let tooShortPassword = makeCredentials(matchingPassword: "123456789")
+        let tooShortPassword = makeCredentials(matchingPassword: "123456789H")
 
         expect(.passwordNeedsALowercaseLetter, from: sut, for: tooShortPassword)
     }
