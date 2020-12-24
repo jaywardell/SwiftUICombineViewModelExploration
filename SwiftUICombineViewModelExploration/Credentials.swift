@@ -19,3 +19,13 @@ protocol CredentialsValidation {
     
     init(passwordFeedback: String, isValid: Bool)
 }
+
+protocol CredentialsValidator {
+    func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C) -> V
+}
+
+fileprivate struct Always: CredentialsValidator {
+    func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
+        V(passwordFeedback: "", isValid: true)
+    }
+}

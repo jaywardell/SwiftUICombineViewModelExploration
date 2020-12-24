@@ -33,15 +33,19 @@ struct LoginForm {
     @State var credentials: CredentialsViewModel
     @State var validation: ValidationViewModel
 
-    let validate: (CredentialsViewModel)->ValidationViewModel
-    
-    static let alwaysValid: (Credentials)->ValidationViewModel = {
-        print($0)
-        return .init(passwordFeedback: "", isValid: true)
+    let validator: CredentialsValidator
+  
+    struct AlwaysValid: CredentialsValidator {
+        func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
+            print(credentials)
+            return .init(passwordFeedback: "", isValid: true)
+        }
     }
-
-    static let neverValid: (Credentials)->ValidationViewModel = { _ in
-        .init(passwordFeedback: "", isValid: false)
+    
+    struct NeverValid: CredentialsValidator {
+        func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
+            .init(passwordFeedback: "", isValid: false)
+        }
     }
 
     let submit: (Credentials)->()
@@ -102,7 +106,7 @@ extension LoginForm: View {
             .navigationTitle("Sign up")
         }
         .onChange(of: credentials, perform: { value in
-            self.validation = validate(credentials)
+            self.validation = validator.validate(credentials)
         })
     }
 }
@@ -113,17 +117,17 @@ struct LoginForm_Previews: PreviewProvider {
         Group {
             LoginForm(credentials: .empty,
                       validation: .empty,
-                      validate: LoginForm.alwaysValid,
+                      validator: LoginForm.AlwaysValid(),
                       submit: LoginForm.emptySubmission)
 
             LoginForm(credentials: .init(username: "Sam", password: "ccc", passwordAgain: "ccc"),
                       validation: .init(passwordFeedback: "password is too short", isValid: false),
-                      validate: LoginForm.neverValid,
+                      validator: LoginForm.NeverValid(),
                       submit: LoginForm.emptySubmission)
 
             LoginForm(credentials: .init(username: "George", password: "a valid password", passwordAgain: "a valid password"),
                       validation: .valid,
-                      validate: LoginForm.neverValid,
+                      validator: LoginForm.NeverValid(),
                       submit: LoginForm.emptySubmission)
         }
     }
