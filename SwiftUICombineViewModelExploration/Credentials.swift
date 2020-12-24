@@ -16,4 +16,6 @@ protocol Credentials {
 protocol CredentialsValidation {
     var passwordFeedback: String { get }
     var isValid: Bool { get }
+    
+    init(passwordFeedback: String, isValid: Bool)
 }
