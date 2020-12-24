@@ -37,7 +37,7 @@ public struct PasswordValidator: CredentialsValidator {
             case .valid: return ""
             case .emptyUsername: return "Username cannot be empty"
             case .usernameIsTooShort: return "Username must be at least \(Self.MinUsernameLength) characters long"
-            case .emptyPassword: return "Password cannot be empty"
+            case .emptyPassword: return ""
                 
             // if the user hasn't yet typed the password verification, don't report anything
             case .emptyPasswordVerification: return ""
