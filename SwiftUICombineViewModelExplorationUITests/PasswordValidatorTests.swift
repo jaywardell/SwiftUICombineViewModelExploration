@@ -38,4 +38,12 @@ class PasswordValidatorTests: XCTestCase {
         XCTAssertEqual(validation.isValid, false)
     }
 
+    func test_validate_emptyNonMatchingPasswordfsAreInvalid() {
+        let sut = PasswordValidator()
+        let nonmatchingPasswords = MockCredentials(username: "", password: "hi", passwordAgain: "bye")
+        let validation: MockValidation = sut.validate(nonmatchingPasswords)
+
+        XCTAssertEqual(validation.isValid, false)
+    }
+
 }
