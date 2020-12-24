@@ -17,7 +17,7 @@ struct SignupForm {
 
         static var empty: Self { .init(username: "", password: "", passwordAgain: "") }
     }
-    @State var credentials: CredentialsViewModel
+    @State var credentials: CredentialsViewModel = .empty
 
     struct ValidationViewModel: CredentialsValidation {
         var passwordFeedback: String
@@ -27,7 +27,7 @@ struct SignupForm {
 
         fileprivate static var valid: ValidationViewModel { .init(passwordFeedback: "", isValid: true) }
     }
-    @State var validation: ValidationViewModel
+    @State var validation: ValidationViewModel = .empty
 
     let validator: CredentialsValidator
   
@@ -61,6 +61,15 @@ struct SignupForm {
             credentials = credentials.withClearedPassword()
         }
     }
+    
+}
+
+extension SignupForm {
+    init(_ validator: CredentialsValidator = AlwaysValid(), submit: @escaping (Credentials)->() = SignupForm.emptySubmission) {
+        self.validator = validator
+        self.submit = submit
+    }
+
 }
 
 // MARK:- LoginForm: View
@@ -95,6 +104,8 @@ extension SignupForm: View {
                     }
                 }
                 
+                Spacer()
+                
                 if validation.isValid {
                     Button(action: {
                         submit(credentials)
@@ -116,20 +127,20 @@ extension SignupForm: View {
 struct LoginForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SignupForm(credentials: .empty,
-                      validation: .empty,
-                      validator: SignupForm.AlwaysValid(),
-                      submit: SignupForm.emptySubmission)
-
+            SignupForm()
+                .previewDisplayName("First Visible")
+            
             SignupForm(credentials: .init(username: "Sam", password: "ccc", passwordAgain: "ccc"),
                       validation: .init(passwordFeedback: "password is too short", isValid: false),
                       validator: SignupForm.NeverValid(),
                       submit: SignupForm.emptySubmission)
+                .previewDisplayName("Invalid Entry: password is too short")
 
             SignupForm(credentials: .init(username: "George", password: "a valid password", passwordAgain: "a valid password"),
                       validation: .valid,
                       validator: SignupForm.NeverValid(),
                       submit: SignupForm.emptySubmission)
+                .previewDisplayName("Valid Entry")
         }
     }
 }
