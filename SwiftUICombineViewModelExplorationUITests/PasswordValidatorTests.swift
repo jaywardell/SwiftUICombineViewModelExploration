@@ -58,6 +58,13 @@ class PasswordValidatorTests: XCTestCase {
         expect(.passwordsIsTooShort, from: sut, for: tooShortPassword)
     }
     
+    func test_validate_passwordMustHaveAtLeastOneNumber() {
+        let sut = PasswordValidator()
+        let tooShortPassword = makeCredentials(username: "George", matchingPassword: "aaaaaaaa")
+
+        expect(.passwordNeedsANumber, from: sut, for: tooShortPassword)
+    }
+    
     // Mark:- Helpers
     
     func makeCredentials(username: String, matchingPassword: String) -> MockCredentials {

@@ -24,7 +24,8 @@ public struct PasswordValidator: CredentialsValidator {
         case emptyPassword
         case passwordsIsTooShort
         case passwordsDoNotMatch
-        
+        case passwordNeedsANumber
+
         public static let MinPasswordLength: Int = 5
         public static let MinUsernameLength: Int = 3
 
@@ -36,10 +37,14 @@ public struct PasswordValidator: CredentialsValidator {
             case .emptyPassword: return "Password cannot be emoty"
             case .passwordsIsTooShort: return "Passwords must be at least \(Self.MinPasswordLength) characters long"
             case .passwordsDoNotMatch: return "Passwords do not match"
+            case .passwordNeedsANumber: return "Passwords need at least one number"
             }
         }
     }
     
+    static let HasNumberPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[0-9])")
+    static let HasLowercasePredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])")
+
     public func validate<C>(_ credentials: C) -> Validation where C : Credentials {
         if credentials.username.isEmpty {
             return .emptyUsername
@@ -52,6 +57,12 @@ public struct PasswordValidator: CredentialsValidator {
         }
         else if credentials.password.count < Validation.MinPasswordLength {
             return .passwordsIsTooShort
+        }
+        else if credentials.password != credentials.passwordAgain {
+            return .passwordsDoNotMatch
+        }
+        else if !Self.HasNumberPredicate.evaluate(with: credentials.password) {
+            return .passwordNeedsANumber
         }
         else {
             return .passwordsDoNotMatch
