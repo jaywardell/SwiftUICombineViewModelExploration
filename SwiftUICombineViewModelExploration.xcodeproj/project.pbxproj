@@ -14,7 +14,7 @@
 		7C1D661E2594CCA400A9ED00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C1D661D2594CCA400A9ED00 /* Preview Assets.xcassets */; };
 		7C1D66212594CCA400A9ED00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C1D661F2594CCA400A9ED00 /* LaunchScreen.storyboard */; };
 		7C1D662C2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D662B2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift */; };
-		7C1D66482594CCC600A9ED00 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66472594CCC600A9ED00 /* LoginForm.swift */; };
+		7C1D66482594CCC600A9ED00 /* SignupForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66472594CCC600A9ED00 /* SignupForm.swift */; };
 		7C1D664D2594DAE000A9ED00 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D664C2594DAE000A9ED00 /* Credentials.swift */; };
 		7C1D665A2594E0B900A9ED00 /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */; };
 		7CC9CEEA2594FFC100BA4BB3 /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9CEE92594FFC100BA4BB3 /* PasswordValidatorTests.swift */; };
@@ -42,7 +42,7 @@
 		7C1D66272594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUICombineViewModelExplorationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1D662B2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICombineViewModelExplorationTests.swift; sourceTree = "<group>"; };
 		7C1D662D2594CCA500A9ED00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C1D66472594CCC600A9ED00 /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
+		7C1D66472594CCC600A9ED00 /* SignupForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupForm.swift; sourceTree = "<group>"; };
 		7C1D664C2594DAE000A9ED00 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		7CC9CEDF2594F99800BA4BB3 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 				7C1D66142594CCA400A9ED00 /* AppDelegate.swift */,
 				7C1D66162594CCA400A9ED00 /* SceneDelegate.swift */,
 				7C1D66182594CCA400A9ED00 /* ContentView.swift */,
-				7C1D66472594CCC600A9ED00 /* LoginForm.swift */,
+				7C1D66472594CCC600A9ED00 /* SignupForm.swift */,
 				7C1D664C2594DAE000A9ED00 /* Credentials.swift */,
 				7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */,
 				7C1D661A2594CCA400A9ED00 /* Assets.xcassets */,
@@ -226,7 +226,7 @@
 				7C1D66172594CCA400A9ED00 /* SceneDelegate.swift in Sources */,
 				7C1D664D2594DAE000A9ED00 /* Credentials.swift in Sources */,
 				7C1D66192594CCA400A9ED00 /* ContentView.swift in Sources */,
-				7C1D66482594CCC600A9ED00 /* LoginForm.swift in Sources */,
+				7C1D66482594CCC600A9ED00 /* SignupForm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

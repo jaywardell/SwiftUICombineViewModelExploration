@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct LoginForm {
+struct SignupForm {
         
     struct CredentialsViewModel: Equatable, Credentials {
         var username: String
@@ -62,7 +62,7 @@ struct LoginForm {
 }
 
 // MARK:- LoginForm: View
-extension LoginForm: View {
+extension SignupForm: View {
     
     private var usernameHeader: some View {
         Text("Username".uppercased())
@@ -119,20 +119,20 @@ extension LoginForm: View {
 struct LoginForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LoginForm(credentials: .empty,
+            SignupForm(credentials: .empty,
                       validation: .empty,
-                      validator: LoginForm.AlwaysValid(),
-                      submit: LoginForm.emptySubmission)
+                      validator: SignupForm.AlwaysValid(),
+                      submit: SignupForm.emptySubmission)
 
-            LoginForm(credentials: .init(username: "Sam", password: "ccc", passwordAgain: "ccc"),
+            SignupForm(credentials: .init(username: "Sam", password: "ccc", passwordAgain: "ccc"),
                       validation: .init(passwordFeedback: "password is too short", isValid: false),
-                      validator: LoginForm.NeverValid(),
-                      submit: LoginForm.emptySubmission)
+                      validator: SignupForm.NeverValid(),
+                      submit: SignupForm.emptySubmission)
 
-            LoginForm(credentials: .init(username: "George", password: "a valid password", passwordAgain: "a valid password"),
+            SignupForm(credentials: .init(username: "George", password: "a valid password", passwordAgain: "a valid password"),
                       validation: .valid,
-                      validator: LoginForm.NeverValid(),
-                      submit: LoginForm.emptySubmission)
+                      validator: SignupForm.NeverValid(),
+                      submit: SignupForm.emptySubmission)
         }
     }
 }

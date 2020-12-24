@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        LoginForm(credentials: .empty, validation: .empty, validator: PasswordValidator(), submit: LoginForm.printSubmission)
+        SignupForm(credentials: .empty, validation: .empty, validator: PasswordValidator(), submit: SignupForm.printSubmission)
     }
 }
 
