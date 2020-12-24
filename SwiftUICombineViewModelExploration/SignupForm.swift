@@ -52,6 +52,9 @@ struct SignupForm {
         print(#function, $0)
     }
     
+    // if the user tries to change the username,
+    // then she's trying to start the process over.
+    // We should go back to a blank password
     private func userBeganEditingUsername(editingBegan: Bool) {
         guard editingBegan else { return }
         if credentials.shouldResetPasswordWhenStartingToEditUsername {

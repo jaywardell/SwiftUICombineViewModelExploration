@@ -31,11 +31,15 @@ class PasswordValidatorTests: XCTestCase {
     
     func test_validate_shortUsernameIsInvalid() {
         let sut = PasswordValidator()
-        let tooshortUsernameCredentials = makeCredentials(username: "G", matchingPassword: "12345")
 
-        expect(.usernameIsTooShort, from: sut, for: tooshortUsernameCredentials)
+        expect(.usernameIsTooShort, from: sut, for: makeCredentials(username: "G", matchingPassword: "1A2B3c"))
+        expect(.usernameIsTooShort, from: sut, for: makeCredentials(username: "Ga", matchingPassword: "1A2B3c"))
     }
 
+    func test_validate_3CharacterUsernameIsVald() {
+        let sut = PasswordValidator()
+        expect(.valid, from: sut, for: makeCredentials(username: "Gil", matchingPassword: "1A2B3c"))
+    }
 
     func test_validate_emptyPasswordIsInvalid() {
         let sut = PasswordValidator()
