@@ -32,30 +32,30 @@ class PasswordValidatorTests: XCTestCase {
     func test_validate_shortUsernameIsInvalid() {
         let sut = PasswordValidator()
 
-        expect(.usernameIsTooShort, from: sut, for: makeCredentials(username: "G", matchingPassword: "1A2B3c"))
-        expect(.usernameIsTooShort, from: sut, for: makeCredentials(username: "Ga", matchingPassword: "1A2B3c"))
+        expect(.usernameIsTooShort, from: sut, for: makeCredentials(username: "G"))
+        expect(.usernameIsTooShort, from: sut, for: makeCredentials(username: "Ga"))
     }
 
     func test_validate_3CharacterUsernameIsVald() {
         let sut = PasswordValidator()
-        expect(.valid, from: sut, for: makeCredentials(username: "Gil", matchingPassword: "1A2B3c"))
+        expect(.valid, from: sut, for: makeCredentials(username: "Gil"))
     }
 
     func test_validate_4CharacterUsernameIsVald() {
         let sut = PasswordValidator()
-        expect(.valid, from: sut, for: makeCredentials(username: "Gary", matchingPassword: "1A2B3c"))
+        expect(.valid, from: sut, for: makeCredentials(username: "Gary"))
     }
 
     func test_validate_emptyPasswordIsInvalid() {
         let sut = PasswordValidator()
-        let emptyPasswordCredentials = makeCredentials(username: "George", matchingPassword: "")
+        let emptyPasswordCredentials = makeCredentials(matchingPassword: "")
 
         expect(.emptyPassword, from: sut, for: emptyPasswordCredentials)
     }
 
     func test_validate_emptyPasswordVerificationIsInvalid() {
         let sut = PasswordValidator()
-        let nonmatchingPasswords = MockCredentials(username: "George", password: "1A2B3c", passwordAgain: "")
+        let nonmatchingPasswords = MockCredentials(username: PasswordValidatorTests.knownAcceptableUsername, password: PasswordValidatorTests.knownAcceptablePassword, passwordAgain: "")
 
         expect(.emptyPasswordVerification, from: sut, for: nonmatchingPasswords)
     }
@@ -63,35 +63,35 @@ class PasswordValidatorTests: XCTestCase {
     
     func test_validate_nonMatchingPasswordsAreInvalid() {
         let sut = PasswordValidator()
-        let nonmatchingPasswords = MockCredentials(username: "George", password: "1A2B3c", passwordAgain: "A2B3c1")
+        let nonmatchingPasswords = MockCredentials(username: PasswordValidatorTests.knownAcceptableUsername, password: PasswordValidatorTests.knownAcceptablePassword, passwordAgain: "A2B3c1")
 
         expect(.passwordsDoNotMatch, from: sut, for: nonmatchingPasswords)
     }
 
     func test_validate_shortPasswordsAreInvalid() {
         let sut = PasswordValidator()
-        let tooShortPassword = makeCredentials(username: "George", matchingPassword: "1Aa")
+        let tooShortPassword = makeCredentials(matchingPassword: "1Aa")
 
         expect(.passwordsIsTooShort, from: sut, for: tooShortPassword)
     }
     
     func test_validate_passwordMustHaveAtLeastOneNumber() {
         let sut = PasswordValidator()
-        let tooShortPassword = makeCredentials(username: "George", matchingPassword: "aaaaaaaa")
+        let tooShortPassword = makeCredentials(matchingPassword: "aaaaaaaa")
 
         expect(.passwordNeedsANumber, from: sut, for: tooShortPassword)
     }
     
     func test_validate_passwordMustHaveAtLeastOneLowercaseLetter() {
         let sut = PasswordValidator()
-        let tooShortPassword = makeCredentials(username: "George", matchingPassword: "123456789")
+        let tooShortPassword = makeCredentials(matchingPassword: "123456789")
 
         expect(.passwordNeedsALowercaseLetter, from: sut, for: tooShortPassword)
     }
 
     func test_validate_passwordMustHaveAtLeastOneUppercaseLetter() {
         let sut = PasswordValidator()
-        let tooShortPassword = makeCredentials(username: "George", matchingPassword: "1a1a2f")
+        let tooShortPassword = makeCredentials(matchingPassword: "1a1a2f")
 
         expect(.passwordNeedsAnUppercaseLetter, from: sut, for: tooShortPassword)
     }
@@ -99,18 +99,21 @@ class PasswordValidatorTests: XCTestCase {
     func test_validate_validPasswordsPass() {
         let sut = PasswordValidator()
 
-        expect(.valid, from: sut, for: makeCredentials(username: "George", matchingPassword: "1a1a2F"))
-        expect(.valid, from: sut, for: makeCredentials(username: "George", matchingPassword: "a1a2F"))
-        expect(.valid, from: sut, for: makeCredentials(username: "George", matchingPassword: "E1a1a2"))
-        expect(.valid, from: sut, for: makeCredentials(username: "George", matchingPassword: "99rTTe"))
+        expect(.valid, from: sut, for: makeCredentials(matchingPassword: "1a1a2F"))
+        expect(.valid, from: sut, for: makeCredentials(matchingPassword: "a1a2F"))
+        expect(.valid, from: sut, for: makeCredentials(matchingPassword: "E1a1a2"))
+        expect(.valid, from: sut, for: makeCredentials(matchingPassword: "99rTTe"))
     }
 
     // Mark:- Helpers
     
-    func makeCredentials(username: String, matchingPassword: String) -> MockCredentials {
+    func makeCredentials(username: String = knownAcceptableUsername, matchingPassword: String = PasswordValidatorTests.knownAcceptablePassword) -> MockCredentials {
         MockCredentials(username: username, password: matchingPassword, passwordAgain: matchingPassword)
     }
     
+    static let knownAcceptablePassword = "1A2B3c"
+    static let knownAcceptableUsername = "Jeanette"
+
     func expect<C: Credentials>(_ expected: PasswordValidator.Validation, from sut: PasswordValidator, for input: C, file: StaticString = #filePath, line: UInt = #line) {
         let validation: PasswordValidator.Validation = sut.validate(input)
 
