@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol Credentials {
+public protocol Credentials {
     var username: String { get }
     var password: String { get }
     var passwordAgain: String { get }
 }
 
-protocol CredentialsValidation {
+public protocol CredentialsValidation {
     var passwordFeedback: String { get }
     var isValid: Bool { get }
     
@@ -22,10 +22,4 @@ protocol CredentialsValidation {
 
 protocol CredentialsValidator {
     func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C) -> V
-}
-
-fileprivate struct Always: CredentialsValidator {
-    func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
-        V(passwordFeedback: "", isValid: true)
-    }
 }
