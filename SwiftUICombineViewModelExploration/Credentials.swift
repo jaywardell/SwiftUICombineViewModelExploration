@@ -16,14 +16,6 @@ public protocol Credentials {
 }
 
 extension Credentials {
-    var shouldResetPasswordWhenStartingToEditUsername: Bool {
-        return true
-    }
-    
-    var shouldResetPasswordWhenStartingToEditPassword: Bool {
-        return true
-    }
-
     func withClearedPassword<T: Credentials>() -> T {
         .init(username: username, password: "", passwordAgain: "")
     }

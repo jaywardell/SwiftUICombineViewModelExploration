@@ -54,10 +54,10 @@ struct SignupForm {
     
     // if the user tries to change the username,
     // then she's trying to start the process over.
-    // We should go back to a blank password
+    // We should go back to a blank password unless she's entered a valid password
     private func userBeganEditingUsername(editingBegan: Bool) {
         guard editingBegan else { return }
-        if credentials.shouldResetPasswordWhenStartingToEditUsername {
+        if !validation.isValid {
             credentials = credentials.withClearedPassword()
         }
     }
