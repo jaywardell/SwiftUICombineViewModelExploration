@@ -13,7 +13,7 @@ import SwiftUI
 
 struct LoginForm {
         
-    struct CredentialsViewModel: Equatable {
+    struct CredentialsViewModel: Equatable, Credentials {
         var username: String
         var password: String
         var passwordAgain: String
@@ -21,9 +21,8 @@ struct LoginForm {
         static var empty: Self { .init(username: "", password: "", passwordAgain: "") }
     }
      
-    struct ValidationViewModel {
+    struct ValidationViewModel: CredentialsValidation {
         var passwordFeedback: String
-        
         var isValid: Bool
         
         static var empty: ValidationViewModel { .init(passwordFeedback: "", isValid: false) }
