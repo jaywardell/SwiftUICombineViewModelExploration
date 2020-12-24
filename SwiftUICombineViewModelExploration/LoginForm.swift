@@ -52,6 +52,13 @@ struct LoginForm {
     static let printSubmission: (Credentials)->() = {
         print(#function, $0)
     }
+    
+    private func resetPasswordIfNeeded(editingBegan: Bool) {
+        guard editingBegan else { return }
+        if credentials.shouldResetPassword {
+            credentials = credentials.withClearedPassword()
+        }
+    }
 }
 
 // MARK:- LoginForm: View
@@ -75,7 +82,7 @@ extension LoginForm: View {
             VStack {
                 Form {
                     Section(header: usernameHeader) {
-                        TextField("Username", text: $credentials.username)
+                        TextField("Username", text: $credentials.username, onEditingChanged: resetPasswordIfNeeded(editingBegan:))
                             .autocapitalization(.none)
                     }
                     

@@ -11,6 +11,18 @@ public protocol Credentials {
     var username: String { get }
     var password: String { get }
     var passwordAgain: String { get }
+    
+    init(username: String, password: String, passwordAgain: String)
+}
+
+extension Credentials {
+    var shouldResetPassword: Bool {
+        return true
+    }
+    
+    func withClearedPassword<T: Credentials>() -> T {
+        .init(username: username, password: "", passwordAgain: "")
+    }
 }
 
 public protocol CredentialsValidation {
