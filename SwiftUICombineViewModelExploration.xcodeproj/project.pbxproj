@@ -15,6 +15,7 @@
 		7C1D66212594CCA400A9ED00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C1D661F2594CCA400A9ED00 /* LaunchScreen.storyboard */; };
 		7C1D662C2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D662B2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift */; };
 		7C1D66372594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66362594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift */; };
+		7C1D66482594CCC600A9ED00 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66472594CCC600A9ED00 /* LoginForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		7C1D66322594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUICombineViewModelExplorationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1D66362594CCA500A9ED00 /* SwiftUICombineViewModelExplorationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICombineViewModelExplorationUITests.swift; sourceTree = "<group>"; };
 		7C1D66382594CCA500A9ED00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C1D66472594CCC600A9ED00 /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				7C1D66142594CCA400A9ED00 /* AppDelegate.swift */,
 				7C1D66162594CCA400A9ED00 /* SceneDelegate.swift */,
 				7C1D66182594CCA400A9ED00 /* ContentView.swift */,
+				7C1D66472594CCC600A9ED00 /* LoginForm.swift */,
 				7C1D661A2594CCA400A9ED00 /* Assets.xcassets */,
 				7C1D661F2594CCA400A9ED00 /* LaunchScreen.storyboard */,
 				7C1D66222594CCA400A9ED00 /* Info.plist */,
@@ -269,6 +272,7 @@
 				7C1D66152594CCA400A9ED00 /* AppDelegate.swift in Sources */,
 				7C1D66172594CCA400A9ED00 /* SceneDelegate.swift in Sources */,
 				7C1D66192594CCA400A9ED00 /* ContentView.swift in Sources */,
+				7C1D66482594CCC600A9ED00 /* LoginForm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
