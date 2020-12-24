@@ -13,7 +13,7 @@ import SwiftUI
 
 struct LoginForm {
         
-    struct Credentials: Equatable {
+    struct CredentialsViewModel: Equatable {
         var username: String
         var password: String
         var passwordAgain: String
@@ -21,35 +21,35 @@ struct LoginForm {
         static var empty: Self { .init(username: "", password: "", passwordAgain: "") }
     }
      
-    struct Validation {
+    struct ValidationViewModel {
         var passwordFeedback: String
         
         var isValid: Bool
         
-        static var empty: Validation { .init(passwordFeedback: "", isValid: false) }
+        static var empty: ValidationViewModel { .init(passwordFeedback: "", isValid: false) }
 
-        static var valid: Validation { .init(passwordFeedback: "", isValid: true) }
+        static var valid: ValidationViewModel { .init(passwordFeedback: "", isValid: true) }
     }
     
-    @State var credentials: Credentials
-    @State var validation: Validation
+    @State var credentials: CredentialsViewModel
+    @State var validation: ValidationViewModel
 
-    let validate: (Credentials)->Validation
+    let validate: (CredentialsViewModel)->ValidationViewModel
     
-    static let alwaysValid: (Credentials)->Validation = {
+    static let alwaysValid: (CredentialsViewModel)->ValidationViewModel = {
         print($0)
         return .init(passwordFeedback: "", isValid: true)
     }
 
-    static let neverValid: (Credentials)->Validation = { _ in
+    static let neverValid: (CredentialsViewModel)->ValidationViewModel = { _ in
         .init(passwordFeedback: "", isValid: false)
     }
 
-    let submit: (Credentials)->()
+    let submit: (CredentialsViewModel)->()
     
-    static let emptySubmission: (Credentials)->() = { _ in }
+    static let emptySubmission: (CredentialsViewModel)->() = { _ in }
 
-    static let printSubmission: (Credentials)->() = {
+    static let printSubmission: (CredentialsViewModel)->() = {
         print(#function, $0)
     }
 }
