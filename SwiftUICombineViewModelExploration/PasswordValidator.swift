@@ -23,17 +23,17 @@ public struct PasswordValidator {
         case passwordNeedsALowercaseLetter
         case passwordNeedsAnUppercaseLetter
 
-        public static let MinPasswordLength: Int = 5
         public static let MinUsernameLength: Int = 3
+        public static let MinPasswordLength: Int = 5
 
-        var reason: String {
+        var explanantion: String {
             switch self {
             case .valid: return ""
             case .emptyUsername: return "Username cannot be empty"
             case .usernameIsTooShort: return "Username must be at least \(Self.MinUsernameLength) characters long"
-            case .emptyPassword: return ""
                 
-            // if the user hasn't yet typed the password verification, don't report anything
+            // if the user hasn't yet typed the password or password verification, don't report anything in the UI
+            case .emptyPassword: return ""
             case .emptyPasswordVerification: return ""
                 
             case .passwordsIsTooShort: return "Passwords must be at least \(Self.MinPasswordLength) characters long"
@@ -50,36 +50,17 @@ public struct PasswordValidator {
     static let HasUppercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[A-Z].*")
 
     public func validate<C>(_ credentials: C) -> Validation where C : Credentials {
-        if credentials.username.isEmpty {
-            return .emptyUsername
-        }
-        else if credentials.username.count < Validation.MinUsernameLength {
-            return .usernameIsTooShort
-        }
-        else if credentials.password.isEmpty {
-            return .emptyPassword
-        }
-        else if !Self.HasNumberPredicate.evaluate(with: credentials.password) {
-            return .passwordNeedsANumber
-        }
-        else if !Self.HasLowercaseLetterPredicate.evaluate(with: credentials.password) {
-            return .passwordNeedsALowercaseLetter
-        }
-        else if !Self.HasUppercaseLetterPredicate.evaluate(with: credentials.password) {
-            return .passwordNeedsAnUppercaseLetter
-        }
-        else if credentials.password.count < Validation.MinPasswordLength {
-            return .passwordsIsTooShort
-        }
-        else if credentials.passwordAgain.isEmpty {
-            return .emptyPasswordVerification
-        }
-        else if credentials.password != credentials.passwordAgain {
-            return .passwordsDoNotMatch
-        }
-        else {
-            return .valid
-        }
+        guard !credentials.username.isEmpty else { return .emptyUsername }
+        guard credentials.username.count >= Validation.MinUsernameLength else { return .usernameIsTooShort }
+        guard !credentials.password.isEmpty else { return .emptyPassword }
+        guard Self.HasNumberPredicate.evaluate(with: credentials.password) else { return .passwordNeedsANumber }
+        guard Self.HasLowercaseLetterPredicate.evaluate(with: credentials.password) else { return .passwordNeedsALowercaseLetter }
+        guard Self.HasUppercaseLetterPredicate.evaluate(with: credentials.password) else { return .passwordNeedsAnUppercaseLetter }
+        guard credentials.password.count >= Validation.MinPasswordLength else { return .passwordsIsTooShort }
+        guard !credentials.passwordAgain.isEmpty else { return .emptyPasswordVerification }
+        guard credentials.password == credentials.passwordAgain else { return .passwordsDoNotMatch }
+        
+        return .valid
     }
 }
 
@@ -89,6 +70,6 @@ extension PasswordValidator: CredentialsValidator {
     func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
 
         let validation: Validation = validate(credentials)
-        return .init(passwordFeedback: validation.reason, isValid: validation == .valid)
+        return .init(passwordFeedback: validation.explanantion, isValid: validation == .valid)
     }
 }
