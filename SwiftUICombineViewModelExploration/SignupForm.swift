@@ -17,29 +17,28 @@ struct SignupForm {
 
         static var empty: Self { .init(username: "", password: "", passwordAgain: "") }
     }
-     
+    @State var credentials: CredentialsViewModel
+
     struct ValidationViewModel: CredentialsValidation {
         var passwordFeedback: String
         var isValid: Bool
         
         static var empty: ValidationViewModel { .init(passwordFeedback: "", isValid: false) }
 
-        static var valid: ValidationViewModel { .init(passwordFeedback: "", isValid: true) }
+        fileprivate static var valid: ValidationViewModel { .init(passwordFeedback: "", isValid: true) }
     }
-    
-    @State var credentials: CredentialsViewModel
     @State var validation: ValidationViewModel
 
     let validator: CredentialsValidator
   
-    struct AlwaysValid: CredentialsValidator {
+    fileprivate struct AlwaysValid: CredentialsValidator {
         func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
             print(credentials)
             return .init(passwordFeedback: "", isValid: true)
         }
     }
     
-    struct NeverValid: CredentialsValidator {
+    fileprivate struct NeverValid: CredentialsValidator {
         func validate<C, V>(_ credentials: C) -> V where C : Credentials, V : CredentialsValidation {
             .init(passwordFeedback: "", isValid: false)
         }
@@ -47,7 +46,7 @@ struct SignupForm {
 
     let submit: (Credentials)->()
     
-    static let emptySubmission: (Credentials)->() = { _ in }
+    fileprivate static let emptySubmission: (Credentials)->() = { _ in }
 
     static let printSubmission: (Credentials)->() = {
         print(#function, $0)
@@ -88,24 +87,19 @@ extension SignupForm: View {
                     
                     Section(header: passwordHeader,
                             footer: passwordFooter) {
-                        SecureField("Password", text: $credentials.password)
+                        SecureField("Password", text: $credentials.password, onCommit: {  print("commmited")})
                         SecureField("Password Again", text: $credentials.passwordAgain)
                     }
                 }
                 
-                // NOTE: this is incorrect as it brings the button up with the software keyboard when typing
-                Button(action: {
-                    submit(credentials)
-                }, label: {
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(height: 60)
-                        .overlay(
-                            Text("Continue")
-                                .foregroundColor(.white)
-                        )
-                })
-                .disabled(!validation.isValid)
-                .padding()
+                if validation.isValid {
+                    Button(action: {
+                        submit(credentials)
+                    }, label: {
+                        Text("Sign Up")
+                    })
+                    .padding()
+                }
             }
             .navigationTitle("Sign up")
         }
