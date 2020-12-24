@@ -17,6 +17,7 @@
 		7C1D66482594CCC600A9ED00 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66472594CCC600A9ED00 /* LoginForm.swift */; };
 		7C1D664D2594DAE000A9ED00 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D664C2594DAE000A9ED00 /* Credentials.swift */; };
 		7C1D665A2594E0B900A9ED00 /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */; };
+		7CC9CEEA2594FFC100BA4BB3 /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9CEE92594FFC100BA4BB3 /* PasswordValidatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		7C1D664C2594DAE000A9ED00 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		7CC9CEDF2594F99800BA4BB3 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		7CC9CEE92594FFC100BA4BB3 /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				7C1D662B2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift */,
+				7CC9CEE92594FFC100BA4BB3 /* PasswordValidatorTests.swift */,
 				7C1D662D2594CCA500A9ED00 /* Info.plist */,
 			);
 			path = SwiftUICombineViewModelExplorationTests;
@@ -232,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C1D662C2594CCA500A9ED00 /* SwiftUICombineViewModelExplorationTests.swift in Sources */,
+				7CC9CEEA2594FFC100BA4BB3 /* PasswordValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
