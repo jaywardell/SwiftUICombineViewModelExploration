@@ -30,12 +30,12 @@ class PasswordValidatorTests: XCTestCase {
         XCTAssertEqual(validation.isValid, false)
     }
     
-//    func test_validate_emptyPasswordIsInvalid() {
-//        let sut = PasswordValidator()
-//        let emptyPasswordCredentials = MockCredentials(username: "", password: "", passwordAgain: "")
-//        let validation: MockValidation = sut.validate(emptyPasswordCredentials)
-//        
-//        XCTAssertEqual(validation.isValid, false)
-//    }
+    func test_validate_emptyPasswordIsInvalid() {
+        let sut = PasswordValidator()
+        let emptyPasswordCredentials = MockCredentials(username: "", password: "", passwordAgain: "")
+        let validation: MockValidation = sut.validate(emptyPasswordCredentials)
+
+        XCTAssertEqual(validation.isValid, false)
+    }
 
 }
