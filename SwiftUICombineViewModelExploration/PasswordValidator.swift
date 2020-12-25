@@ -9,18 +9,21 @@ import Foundation
 
 public struct PasswordValidator {
     
-    static let NonEmptyPassword = "Username cannot be empty"
-    static func MinLengthUserName(ofLength length: Int) -> String { "Username must be at least \(length) characters long" }
-        
+    public static let EmptyUsername = "Username cannot be empty"
+    public static func MinLengthUserName(ofLength length: Int) -> String { "Username must be at least \(length) characters long" }
+    public static let UserNameTooShort = MinLengthUserName(ofLength: Validation.MinUsernameLength)
+    
     // if the user hasn't yet typed the password or password verification, don't report anything in the UI
-    static let EmptyPassword = ""
-    static let EmptyPasswordVerififcation = ""
+    public static let EmptyPassword = ""
+    public static let EmptyPasswordVerification = ""
         
-    static func MinLengthPassword(ofLength length: Int) -> String { "Passwords must be at least \(length) characters long" }
-    static let PasswordsDontMatch = "Passwords do not match"
-    static let PasswordsLackANumber = "Passwords need at least one number"
-    static let PasswordsLackALowercaseLetter = "Passwords need at least one lowercase letter"
-    static let PasswordsLackAnUppercaseLetter = "Passwords need at least one uppercase letter"
+    public static func MinLengthPassword(ofLength length: Int) -> String { "Passwords must be at least \(length) characters long" }
+    public static let PasswordTooShort = MinLengthPassword(ofLength: Validation.MinPasswordLength)
+
+    public static let PasswordsDoNotMatch = "Passwords do not match"
+    public static let PasswordsLackANumber = "Passwords need at least one number"
+    public static let PasswordsLackALowercaseLetter = "Passwords need at least one lowercase letter"
+    public static let PasswordsLackAnUppercaseLetter = "Passwords need at least one uppercase letter"
 
     public init() {}
     
@@ -77,7 +80,7 @@ public struct PasswordValidator {
     static let HasLowercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[a-z].*")
     static let HasUppercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[A-Z].*")
 
-    public func validate<C>(_ credentials: C) -> Validation where C : Credentials {
+    private func val<C>(_ credentials: C) -> Validation where C : Credentials {
         guard !credentials.username.isEmpty else { return .emptyUsername }
         guard credentials.username.count >= Validation.MinUsernameLength else { return .usernameIsTooShort }
         guard !credentials.password.isEmpty else { return .emptyPassword }
@@ -102,8 +105,8 @@ struct PasswordRequirements: CredentialsValidator {
 // MARK:- PasswordValidator: CredentialsValidator
 extension PasswordValidator: CredentialsValidator {
             
-    func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->()) {
-        let validation: Validation = validate(credentials)
+    public func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->()) {
+        let validation: Validation = val(credentials)
         switch validation {
         case .valid:
             completion(nil)
