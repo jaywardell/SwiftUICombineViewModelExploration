@@ -15,10 +15,10 @@ struct MockCredentials: Credentials {
     let passwordAgain: String
 }
 
-struct MockValidation: CredentialsValidation {
-    let passwordFeedback: String
-    let isValid: Bool
-}
+//struct MockValidation: CredentialsValidation {
+//    let passwordFeedback: String
+//    let isValid: Bool
+//}
 
 class PasswordValidatorTests: XCTestCase {
 

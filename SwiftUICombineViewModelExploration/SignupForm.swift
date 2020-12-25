@@ -19,30 +19,23 @@ struct SignupForm {
     }
     @State var credentials: CredentialsViewModel = .empty
 
-    struct ValidationViewModel: CredentialsValidation {
-        var passwordFeedback: String
-        var isValid: Bool
-        
-        static var empty: ValidationViewModel { .init(passwordFeedback: "", isValid: false) }
-
-        fileprivate static var valid: ValidationViewModel { .init(passwordFeedback: "", isValid: true) }
-    }
-    @State var validation: ValidationViewModel = .empty
-
+    @State var validationError: Error?
+    
     let validator: CredentialsValidator
   
     fileprivate struct AlwaysValid: CredentialsValidator {
-        func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C, completion: @escaping (V)->()) {
+        func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->()) {
             print(credentials)
-            let validation = V(passwordFeedback: "", isValid: true)
-            completion(validation)
+            completion(nil)
         }
     }
     
     fileprivate struct NeverValid: CredentialsValidator {
-        func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C, completion: @escaping (V)->()) {
-            let validation = V(passwordFeedback: "", isValid: false)
-            completion(validation)
+        struct AlwaysError: Error, LocalizedError {
+            var errorDescription: String? { "always an error" }
+        }
+        func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->()) {
+            completion(AlwaysError())
         }
     }
 
@@ -59,7 +52,7 @@ struct SignupForm {
     // We should go back to a blank password unless she's entered a valid password
     private func userBeganEditingUsername(editingBegan: Bool) {
         guard editingBegan else { return }
-        if !validation.isValid {
+        if nil != validationError {
             credentials = credentials.withClearedPassword()
         }
     }
@@ -86,7 +79,7 @@ extension SignupForm: View {
     }
     
     private var passwordFooter: some View {
-        Text(validation.passwordFeedback)
+        Text(validationError?.localizedDescription ?? "")
             .foregroundColor(.red)
     }
     
@@ -108,7 +101,7 @@ extension SignupForm: View {
                 
                 Spacer()
                 
-                if validation.isValid {
+                if nil == validationError {
                     Button(action: {
                         submit(credentials)
                     }, label: {
@@ -121,28 +114,41 @@ extension SignupForm: View {
         }
         .onChange(of: credentials, perform: { value in
             validator.validate(credentials) {
-                self.validation = $0
+                self.validationError = $0
             }
         })
     }
 }
 
+
 // MARK:- LoginForm_Previews
 struct LoginForm_Previews: PreviewProvider {
+    
+    private struct NamedError: Error, LocalizedError {
+        let explanation: String
+        init(_ explanation: String) {
+            self.explanation = explanation
+        }
+        
+        public var errorDescription: String? {
+            explanation
+        }
+    }
+
     static var previews: some View {
         Group {
             SignupForm()
                 .previewDisplayName("First Visible")
             
             SignupForm(credentials: .init(username: "Sam", password: "ccc", passwordAgain: "ccc"),
-                      validation: .init(passwordFeedback: "password is too short", isValid: false),
+                       validationError: NamedError("Invalid Entry: password is too short"),
                       validator: SignupForm.NeverValid(),
                       submit: SignupForm.emptySubmission)
                 .previewDisplayName("Invalid Entry: password is too short")
 
             SignupForm(credentials: .init(username: "George", password: "a valid password", passwordAgain: "a valid password"),
-                      validation: .valid,
-                      validator: SignupForm.NeverValid(),
+                       validationError: nil,
+                      validator: SignupForm.AlwaysValid(),
                       submit: SignupForm.emptySubmission)
                 .previewDisplayName("Valid Entry")
         }

@@ -11,6 +11,21 @@ public struct PasswordValidator {
     
     public init() {}
     
+    struct ValidationError: Swift.Error, LocalizedError {
+        let explanation: String
+        init(_ explanation: String) {
+            self.explanation = explanation
+        }
+        
+        var localizedDescription: String {
+            explanation
+        }
+
+        public var errorDescription: String? {
+            explanation
+        }
+    }
+
     public enum Validation: Equatable {
         case valid
         case emptyUsername
@@ -62,15 +77,19 @@ public struct PasswordValidator {
         
         return .valid
     }
+    
 }
 
 // MARK:- PasswordValidator: CredentialsValidator
 extension PasswordValidator: CredentialsValidator {
-        
-    func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C, completion: @escaping (V)->()) {
-
+            
+    func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->()) {
         let validation: Validation = validate(credentials)
-        let toCallBack = V(passwordFeedback: validation.explanantion, isValid: validation == .valid)
-        completion(toCallBack)
+        switch validation {
+        case .valid:
+            completion(nil)
+        default:
+            completion(ValidationError(validation.explanantion))
+        }
     }
 }

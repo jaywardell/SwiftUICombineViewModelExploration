@@ -21,13 +21,6 @@ extension Credentials {
     }
 }
 
-public protocol CredentialsValidation {
-    var passwordFeedback: String { get }
-    var isValid: Bool { get }
-    
-    init(passwordFeedback: String, isValid: Bool)
-}
-
 protocol CredentialsValidator {
-    func validate<C: Credentials, V: CredentialsValidation>(_ credentials: C, completion: @escaping (V)->())
+    func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->())
 }
