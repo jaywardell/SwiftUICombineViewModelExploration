@@ -15,12 +15,6 @@ public protocol Credentials {
     init(username: String, password: String, passwordAgain: String)
 }
 
-extension Credentials {
-    func withClearedPassword<T: Credentials>() -> T {
-        .init(username: username, password: "", passwordAgain: "")
-    }
-}
-
 protocol CredentialsValidator {
     func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->())
 }

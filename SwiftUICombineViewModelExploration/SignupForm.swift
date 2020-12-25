@@ -16,6 +16,10 @@ struct SignupForm {
         var passwordAgain: String
 
         static var empty: Self { .init(username: "", password: "", passwordAgain: "") }
+        
+        func withClearedPassword() -> ViewModel {
+            ViewModel(username: username, password: "", passwordAgain: "")
+        }
     }
     @State var credentials: ViewModel = .empty
 
