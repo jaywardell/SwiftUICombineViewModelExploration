@@ -10,14 +10,14 @@ import SwiftUI
 
 struct SignupForm {
         
-    struct CredentialsViewModel: Equatable, Credentials {
+    struct ViewModel: Equatable, Credentials {
         var username: String
         var password: String
         var passwordAgain: String
 
         static var empty: Self { .init(username: "", password: "", passwordAgain: "") }
     }
-    @State var credentials: CredentialsViewModel = .empty
+    @State var credentials: ViewModel = .empty
 
     @State var validationError: Error?
     
