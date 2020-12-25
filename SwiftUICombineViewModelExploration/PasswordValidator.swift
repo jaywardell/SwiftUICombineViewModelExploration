@@ -9,6 +9,19 @@ import Foundation
 
 public struct PasswordValidator {
     
+    static let NonEmptyPassword = "Username cannot be empty"
+    static func MinLengthUserName(ofLength length: Int) -> String { "Username must be at least \(length) characters long" }
+        
+    // if the user hasn't yet typed the password or password verification, don't report anything in the UI
+    static let EmptyPassword = ""
+    static let EmptyPasswordVerififcation = ""
+        
+    static func MinLengthPassword(ofLength length: Int) -> String { "Passwords must be at least \(length) characters long" }
+    static let PasswordsDontMatch = "Passwords do not match"
+    static let PasswordsLackANumber = "Passwords need at least one number"
+    static let PasswordsLackALowercaseLetter = "Passwords need at least one lowercase letter"
+    static let PasswordsLackAnUppercaseLetter = "Passwords need at least one uppercase letter"
+
     public init() {}
     
     struct ValidationError: Swift.Error, LocalizedError {
@@ -77,7 +90,13 @@ public struct PasswordValidator {
         
         return .valid
     }
+}
+
+struct PasswordRequirements: CredentialsValidator {
     
+    func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->()) {
+        completion(nil)
+    }
 }
 
 // MARK:- PasswordValidator: CredentialsValidator
