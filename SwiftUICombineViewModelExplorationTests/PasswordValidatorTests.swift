@@ -112,11 +112,6 @@ class PasswordValidatorTests: XCTestCase {
     
     func makeSUT() -> PasswordValidator {
         return PasswordValidator.WithSomeRequirements
-//        ([
-//            PasswordRequirement.PasswordHasANumber,
-//            PasswordRequirement.PasswordHasALowercaseLetter,
-//            PasswordRequirement.PasswordHasAnUppercaseLetter
-//        ])
     }
     
     func expect<C: Credentials>(_ expected: String?, for input: C, file: StaticString = #filePath, line: UInt = #line) {
