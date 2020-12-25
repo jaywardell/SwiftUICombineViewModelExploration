@@ -59,14 +59,6 @@ struct SignupForm {
     
 }
 
-extension SignupForm {
-    init(_ validator: CredentialsValidator = AlwaysValid(), submit: @escaping (Credentials)->() = SignupForm.emptySubmission) {
-        self.validator = validator
-        self.submit = submit
-    }
-
-}
-
 // MARK:- LoginForm: View
 extension SignupForm: View {
     
@@ -137,14 +129,17 @@ struct LoginForm_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            SignupForm()
+            SignupForm(credentials: .empty,
+                       validationError: nil,
+                      validator: SignupForm.NeverValid(),
+                      submit: SignupForm.emptySubmission)
                 .previewDisplayName("First Visible")
             
             SignupForm(credentials: .init(username: "Sam", password: "ccc", passwordAgain: "ccc"),
                        validationError: NamedError("Invalid Entry: password is too short"),
                       validator: SignupForm.NeverValid(),
                       submit: SignupForm.emptySubmission)
-                .previewDisplayName("Invalid Entry: password is too short")
+                .previewDisplayName("password is too short")
 
             SignupForm(credentials: .init(username: "George", password: "a valid password", passwordAgain: "a valid password"),
                        validationError: nil,
