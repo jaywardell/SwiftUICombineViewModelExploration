@@ -15,6 +15,10 @@ struct SignupForm {
         var password: String
         var passwordAgain: String
 
+        var isEmpty: Bool {
+            username.isEmpty && password.isEmpty && passwordAgain.isEmpty
+        }
+        
         static var empty: Self { .init(username: "", password: "", passwordAgain: "") }
         
         func withClearedPassword() -> ViewModel {
@@ -94,10 +98,8 @@ extension SignupForm: View {
                         SecureField("Password Again", text: $credentials.passwordAgain)
                     }
                 }
-                
-                Spacer()
-                
-                if nil == validationError {
+                                
+                if nil == validationError && !credentials.isEmpty {
                     Button(action: {
                         submit(credentials)
                     }, label: {
