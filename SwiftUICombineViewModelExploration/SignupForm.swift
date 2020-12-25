@@ -90,7 +90,7 @@ extension SignupForm: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
                 Form {
                     Section(header: usernameHeader) {
                         TextField("Username", text: $credentials.username, onEditingChanged: usernameEditingStateChanged(editingBegan:))
@@ -103,14 +103,19 @@ extension SignupForm: View {
                         SecureField("Password Again", text: $credentials.passwordAgain)
                     }
                 }
-                                
+                
                 if nil == validationError && !credentials.isEmpty {
-                    Button(action: {
-                        submit(credentials)
-                    }, label: {
-                        Text("Sign Up")
-                    })
-                    .padding()
+                    VStack {
+                        Spacer()
+                        Button(action: {
+                            submit(credentials)
+                        }, label: {
+                            Text("Sign Up")
+                        })
+                        .padding()
+                    }
+                    .ignoresSafeArea(.keyboard)
+
                 }
             }
             .navigationTitle("Sign up")
