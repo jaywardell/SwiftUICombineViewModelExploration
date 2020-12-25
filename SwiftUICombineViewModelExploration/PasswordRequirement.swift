@@ -36,15 +36,19 @@ public struct PasswordRequirement: CredentialsValidator {
         }
     }
     
-    static let HasNumberPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[0-9].*")
-    static let HasLowercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[a-z].*")
-    static let HasUppercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[A-Z].*")
-
     public static let PasswordsLackANumber = "Passwords need at least one number"
     public static let PasswordsLackALowercaseLetter = "Passwords need at least one lowercase letter"
     public static let PasswordsLackAnUppercaseLetter = "Passwords need at least one uppercase letter"
 
-    public static let PasswordHasANumber = PasswordRequirement(predicate: HasNumberPredicate, errorString: PasswordsLackANumber)
-    public static let PasswordHasALowercaseLetter = PasswordRequirement(predicate: HasLowercaseLetterPredicate, errorString: PasswordsLackALowercaseLetter)
-    public static let PasswordHasAnUppercaseLetter = PasswordRequirement(predicate: HasUppercaseLetterPredicate, errorString: PasswordsLackAnUppercaseLetter)
+    public static let PasswordHasANumber = PasswordRequirement(
+        predicate: NSPredicate(format: "SELF MATCHES %@", ".*[0-9].*"),
+        errorString: PasswordsLackANumber)
+    
+    public static let PasswordHasALowercaseLetter = PasswordRequirement(
+        predicate: NSPredicate(format: "SELF MATCHES %@", ".*[a-z].*"),
+        errorString: PasswordsLackALowercaseLetter)
+    
+    public static let PasswordHasAnUppercaseLetter = PasswordRequirement(
+        predicate: NSPredicate(format: "SELF MATCHES %@", ".*[A-Z].*"),
+        errorString: PasswordsLackAnUppercaseLetter)
 }
