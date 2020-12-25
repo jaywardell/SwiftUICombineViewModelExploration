@@ -55,11 +55,16 @@ struct SignupForm {
         print(#function, $0)
     }
     
+    private func usernameEditingStateChanged(editingBegan: Bool) {
+        if editingBegan {
+            userBeganEditingUsername()
+        }
+    }
+    
     // if the user tries to change the username,
     // then she's trying to start the process over.
     // We should go back to a blank password unless she's entered a valid password
-    private func userBeganEditingUsername(editingBegan: Bool) {
-        guard editingBegan else { return }
+    private func userBeganEditingUsername() {
         if nil != validationError {
             credentials = credentials.withClearedPassword()
         }
@@ -88,7 +93,7 @@ extension SignupForm: View {
             VStack {
                 Form {
                     Section(header: usernameHeader) {
-                        TextField("Username", text: $credentials.username, onEditingChanged: userBeganEditingUsername(editingBegan:))
+                        TextField("Username", text: $credentials.username, onEditingChanged: usernameEditingStateChanged(editingBegan:))
                             .autocapitalization(.none)
                     }
                     
