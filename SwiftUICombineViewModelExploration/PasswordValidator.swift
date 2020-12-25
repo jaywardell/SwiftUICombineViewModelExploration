@@ -24,11 +24,11 @@ public struct PasswordValidator {
     public static let PasswordTooShort = MinLengthPassword(ofLength: MinPasswordLength)
 
     public static let PasswordsDoNotMatch = "Passwords do not match"
-    public static let PasswordsLackANumber = "Passwords need at least one number"
-    public static let PasswordsLackALowercaseLetter = "Passwords need at least one lowercase letter"
-    public static let PasswordsLackAnUppercaseLetter = "Passwords need at least one uppercase letter"
 
-    public init() {}
+    private(set) var passwordRequirements = [PasswordRequirement]()
+    public init(_ passwordRequirements: [PasswordRequirement] = []) {
+        self.passwordRequirements = passwordRequirements
+    }
     
     struct Error: Swift.Error, LocalizedError {
         let explanation: String
@@ -44,32 +44,43 @@ public struct PasswordValidator {
             explanation
         }
     }
+        
+    private func findPasswordRequirementError<C : Credentials>(for credentials: C) -> Swift.Error? {
+        var error: Swift.Error?
+        for requirement in passwordRequirements {
+            requirement.validate(credentials) {
+                error = $0
+            }
+            if nil != error { return error }
+        }
+        return nil
+    }
     
-    static let HasNumberPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[0-9].*")
-    static let HasLowercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[a-z].*")
-    static let HasUppercaseLetterPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", ".*[A-Z].*")
-
-    private func findError<C>(with credentials: C) -> Error? where C : Credentials {
+    private func findError<C : Credentials>(with credentials: C) -> Swift.Error? {
+        
         guard !credentials.username.isEmpty else { return Error(Self.EmptyUsername) }
         guard credentials.username.count >= Self.MinUsernameLength else { return Error(Self.UserNameTooShort) }
         guard !credentials.password.isEmpty else { return Error(Self.EmptyPassword) }
-        guard Self.HasNumberPredicate.evaluate(with: credentials.password) else { return Error(Self.PasswordsLackANumber) }
-        guard Self.HasLowercaseLetterPredicate.evaluate(with: credentials.password) else { return Error(Self.PasswordsLackALowercaseLetter) }
-        guard Self.HasUppercaseLetterPredicate.evaluate(with: credentials.password) else { return Error(Self.PasswordsLackAnUppercaseLetter) }
+  
+        if let businessLogicError = findPasswordRequirementError(for: credentials) {
+            return businessLogicError
+        }
+        
         guard credentials.password.count >= Self.MinPasswordLength else { return Error(Self.PasswordTooShort) }
         guard !credentials.passwordAgain.isEmpty else { return Error(Self.EmptyPassword) }
         guard credentials.password == credentials.passwordAgain else { return Error(Self.PasswordsDoNotMatch) }
         
         return nil
     }
+    
+    public static let WithSomeRequirements: PasswordValidator =
+        PasswordValidator([
+            PasswordRequirement.PasswordHasANumber,
+            PasswordRequirement.PasswordHasALowercaseLetter,
+            PasswordRequirement.PasswordHasAnUppercaseLetter
+        ])
 }
 
-struct PasswordRequirements: CredentialsValidator {
-    
-    func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->()) {
-        completion(nil)
-    }
-}
 
 // MARK:- PasswordValidator: CredentialsValidator
 extension PasswordValidator: CredentialsValidator {

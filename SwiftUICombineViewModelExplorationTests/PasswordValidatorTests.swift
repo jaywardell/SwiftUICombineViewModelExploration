@@ -78,19 +78,19 @@ class PasswordValidatorTests: XCTestCase {
     func test_validate_passwordMustHaveAtLeastOneNumber() {
         let tooShortPassword = makeCredentials(matchingPassword: "aaaaaBBaaa")
 
-        expect(PasswordValidator.PasswordsLackANumber, for: tooShortPassword)
+        expect(PasswordRequirement.PasswordsLackANumber, for: tooShortPassword)
     }
 
     func test_validate_passwordMustHaveAtLeastOneLowercaseLetter() {
         let tooShortPassword = makeCredentials(matchingPassword: "123456789H")
 
-        expect(PasswordValidator.PasswordsLackALowercaseLetter, for: tooShortPassword)
+        expect(PasswordRequirement.PasswordsLackALowercaseLetter, for: tooShortPassword)
     }
 
     func test_validate_passwordMustHaveAtLeastOneUppercaseLetter() {
         let tooShortPassword = makeCredentials(matchingPassword: "1a1a2f")
 
-        expect(PasswordValidator.PasswordsLackAnUppercaseLetter, for: tooShortPassword)
+        expect(PasswordRequirement.PasswordsLackAnUppercaseLetter, for: tooShortPassword)
     }
 
     func test_validate_validPasswordsPass() {
@@ -110,8 +110,17 @@ class PasswordValidatorTests: XCTestCase {
     static let knownAcceptablePassword = "1A2B3c"
     static let knownAcceptableUsername = "Jeanette"
     
+    func makeSUT() -> PasswordValidator {
+        return PasswordValidator.WithSomeRequirements
+//        ([
+//            PasswordRequirement.PasswordHasANumber,
+//            PasswordRequirement.PasswordHasALowercaseLetter,
+//            PasswordRequirement.PasswordHasAnUppercaseLetter
+//        ])
+    }
+    
     func expect<C: Credentials>(_ expected: String?, for input: C, file: StaticString = #filePath, line: UInt = #line) {
-        let sut = PasswordValidator()
+        let sut = makeSUT()
 
         sut.validate(input) { error in
             XCTAssertEqual(error?.localizedDescription, expected, "\nexpected: \(String(describing: expected))\ngot: \(String(describing: error))", file: file, line: line)

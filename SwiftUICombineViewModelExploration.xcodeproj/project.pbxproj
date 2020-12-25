@@ -18,6 +18,7 @@
 		7C1D664D2594DAE000A9ED00 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D664C2594DAE000A9ED00 /* Credentials.swift */; };
 		7C1D665A2594E0B900A9ED00 /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */; };
 		7CC9CEEA2594FFC100BA4BB3 /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9CEE92594FFC100BA4BB3 /* PasswordValidatorTests.swift */; };
+		7CF018D42596306000FB7DC3 /* PasswordRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF018D32596306000FB7DC3 /* PasswordRequirement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		7CC9CEDF2594F99800BA4BB3 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		7CC9CEE92594FFC100BA4BB3 /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
+		7CF018D32596306000FB7DC3 /* PasswordRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRequirement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				7C1D66472594CCC600A9ED00 /* SignupForm.swift */,
 				7C1D664C2594DAE000A9ED00 /* Credentials.swift */,
 				7C1D66592594E0B900A9ED00 /* PasswordValidator.swift */,
+				7CF018D32596306000FB7DC3 /* PasswordRequirement.swift */,
 				7C1D661A2594CCA400A9ED00 /* Assets.xcassets */,
 				7C1D661F2594CCA400A9ED00 /* LaunchScreen.storyboard */,
 				7C1D66222594CCA400A9ED00 /* Info.plist */,
@@ -227,6 +230,7 @@
 				7C1D664D2594DAE000A9ED00 /* Credentials.swift in Sources */,
 				7C1D66192594CCA400A9ED00 /* ContentView.swift in Sources */,
 				7C1D66482594CCC600A9ED00 /* SignupForm.swift in Sources */,
+				7CF018D42596306000FB7DC3 /* PasswordRequirement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
