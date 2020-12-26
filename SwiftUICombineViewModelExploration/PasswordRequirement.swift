@@ -27,7 +27,7 @@ public struct PasswordRequirement: CredentialsValidator {
         }
     }
 
-    func validate<C: Credentials>(_ credentials: C, completion: @escaping (Swift.Error?)->()) {
+    public func validate<C: Credentials>(_ credentials: C, completion: @escaping (Swift.Error?)->()) {
         if !predicate.evaluate(with: credentials.password) {
             completion(Error(errorString))
         }

@@ -25,9 +25,10 @@ public struct PasswordValidator {
 
     public static let PasswordsDoNotMatch = "Passwords do not match"
 
-    private(set) var passwordRequirements = [PasswordRequirement]()
-    public init(_ passwordRequirements: [PasswordRequirement] = []) {
-        self.passwordRequirements = passwordRequirements
+    private let externalRequirements: [CredentialsValidator]
+    
+    public init(_ externalRequirements: [CredentialsValidator] = []) {
+        self.externalRequirements = externalRequirements
     }
     
     struct Error: Swift.Error, LocalizedError {
@@ -47,7 +48,7 @@ public struct PasswordValidator {
         
     private func findPasswordRequirementError<C : Credentials>(for credentials: C) -> Swift.Error? {
         var error: Swift.Error?
-        for requirement in passwordRequirements {
+        for requirement in externalRequirements {
             requirement.validate(credentials) {
                 error = $0
             }
@@ -62,8 +63,8 @@ public struct PasswordValidator {
         guard credentials.username.count >= Self.MinUsernameLength else { return Error(Self.UserNameTooShort) }
         guard !credentials.password.isEmpty else { return Error(Self.EmptyPassword) }
   
-        if let businessLogicError = findPasswordRequirementError(for: credentials) {
-            return businessLogicError
+        if let passwordRequirementError = findPasswordRequirementError(for: credentials) {
+            return passwordRequirementError
         }
         
         guard credentials.password.count >= Self.MinPasswordLength else { return Error(Self.PasswordTooShort) }

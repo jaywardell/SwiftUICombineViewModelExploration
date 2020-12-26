@@ -15,6 +15,6 @@ public protocol Credentials {
     init(username: String, password: String, passwordAgain: String)
 }
 
-protocol CredentialsValidator {
+public protocol CredentialsValidator {
     func validate<C: Credentials>(_ credentials: C, completion: @escaping (Error?)->())
 }
